@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="fr" data-lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Salah Zirari</title>
+<meta name="description" content="Salah Zirari — Tech lead full stack .NET / Azure, Lyon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one left-aligned column; on wide screens each section puts a mono label in a left gutter (11rem | 1fr), stacking on phones. */
+:root {
+  --paper: #F3F5F8;
+  --surface: #FFFFFF;
+  --ink: #111A25;
+  --muted: #586474;
+  --rule: #D6DCE4;
+  --accent: #2340C9;
+  --accent-soft: #E2E7FA;
+  --ok: #1E8449;
+  --display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0D131A; --surface: #141C26; --ink: #E5EAF0; --muted: #93A0B0;
+    --rule: #243142; --accent: #91A5FF; --accent-soft: #1B2547; --ok: #4CC27E;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0D131A; --surface: #141C26; --ink: #E5EAF0; --muted: #93A0B0;
+  --rule: #243142; --accent: #91A5FF; --accent-soft: #1B2547; --ok: #4CC27E;
+  color-scheme: dark;
+}
+
+/* language switch */
+:root[data-lang="fr"] [data-l="en"],
+:root[data-lang="en"] [data-l="fr"] { display: none !important; }
+
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font: 400 1rem/1.6 var(--body);
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--accent); text-underline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+.wrap { max-width: 64rem; margin: 0 auto; padding-inline: 1.25rem; }
+
+/* header */
+.top {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--rule);
+}
+.top .wrap { display: flex; align-items: center; gap: 1.5rem; min-height: 3.5rem; flex-wrap: wrap; }
+.mark { font: 700 1rem/1 var(--display); color: var(--ink); text-decoration: none; letter-spacing: -0.01em; }
+.top nav { display: flex; gap: 1.25rem; margin-left: auto; flex-wrap: wrap; }
+.top nav a { color: var(--muted); text-decoration: none; font-size: 0.875rem; }
+.top nav a:hover { color: var(--ink); }
+.lang { display: inline-flex; border: 1px solid var(--rule); border-radius: 999px; padding: 2px; }
+.lang button {
+  font: 500 0.75rem/1 var(--mono); letter-spacing: 0.06em; color: var(--muted);
+  background: none; border: 0; border-radius: 999px; padding: 0.4rem 0.6rem; cursor: pointer;
+}
+.lang button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+@media (max-width: 640px) { .top nav { display: none; } .lang { margin-left: auto; } }
+
+/* hero */
+.hero { padding-block: 4.5rem 2.5rem; }
+.status {
+  display: inline-flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;
+  font: 400 0.8125rem/1.4 var(--mono); color: var(--muted);
+}
+.dot { width: 0.5rem; height: 0.5rem; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 4px color-mix(in srgb, var(--ok) 20%, transparent); flex: none; }
+h1 {
+  font: 700 clamp(3rem, 9vw, 6.25rem)/0.95 var(--display);
+  letter-spacing: -0.035em; margin: 1.25rem 0 1rem; text-wrap: balance;
+}
+.role { font: 500 clamp(1.125rem, 2.4vw, 1.5rem)/1.3 var(--display); color: var(--accent); margin: 0 0 1.25rem; letter-spacing: -0.01em; }
+.pitch { max-width: 38rem; font-size: 1.125rem; color: var(--ink); margin: 0 0 2rem; }
+.actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; cursor: pointer;
+  font: 500 0.9375rem/1 var(--body); padding: 0.8rem 1.1rem; border-radius: 0.5rem;
+  border: 1px solid var(--rule); background: var(--surface); color: var(--ink);
+}
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--paper); }
+.btn:hover { border-color: var(--accent); }
+.btn svg { width: 1rem; height: 1rem; flex: none; }
+
+/* 50 Hz trace */
+.trace { margin-top: 3rem; display: grid; gap: 0.5rem; }
+.trace canvas { width: 100%; height: 56px; display: block; }
+.trace small { font: 400 0.75rem/1.4 var(--mono); color: var(--muted); letter-spacing: 0.02em; }
+
+/* figures */
+.figures {
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-block: 1px solid var(--rule); margin-block: 1rem 0;
+}
+.figures div { padding: 1.5rem 1.25rem 1.5rem 0; display: grid; gap: 0.25rem; align-content: start; }
+.figures div + div { padding-left: 1.25rem; border-left: 1px solid var(--rule); }
+.figures b { font: 700 2rem/1 var(--display); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.figures span { font-size: 0.875rem; color: var(--muted); }
+@media (max-width: 720px) {
+  .figures { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .figures div:nth-child(3) { padding-left: 0; border-left: 0; }
+  .figures div:nth-child(n+3) { border-top: 1px solid var(--rule); }
+}
+
+/* sections */
+section.block { display: grid; grid-template-columns: 11rem minmax(0, 1fr); gap: 2rem; padding-block: 4rem; border-bottom: 1px solid var(--rule); }
+section.block:last-of-type { border-bottom: 0; }
+.label { font: 500 0.75rem/1.4 var(--mono); text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); padding-top: 0.45rem; }
+@media (max-width: 760px) { section.block { grid-template-columns: minmax(0, 1fr); gap: 1rem; padding-block: 3rem; } }
+h2 { font: 700 clamp(1.5rem, 3.4vw, 2.125rem)/1.15 var(--display); letter-spacing: -0.02em; margin: 0 0 1rem; text-wrap: balance; }
+h3 { font: 600 1.125rem/1.3 var(--body); margin: 0; }
+.meta { font: 400 0.8125rem/1.4 var(--mono); color: var(--muted); }
+
+/* featured case */
+.case { display: grid; gap: 1.5rem; }
+.case .lede { font-size: 1.0625rem; max-width: 40rem; margin: 0; }
+.sources { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.sources span {
+  font: 500 0.8125rem/1 var(--mono); padding: 0.45rem 0.6rem; border-radius: 0.375rem;
+  background: var(--accent-soft); color: var(--accent);
+}
+.sources span.more { background: none; color: var(--muted); padding-inline: 0.25rem; }
+.points { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem 2rem; margin: 0; padding: 0; list-style: none; }
+.points li { display: grid; gap: 0.25rem; padding-top: 0.9rem; border-top: 1px solid var(--rule); }
+.points strong { font-weight: 600; }
+.points p { margin: 0; color: var(--muted); font-size: 0.9375rem; }
+@media (max-width: 640px) { .points { grid-template-columns: minmax(0, 1fr); } }
+.tags { display: flex; flex-wrap: wrap; gap: 0.375rem 0.875rem; font: 400 0.8125rem/1.5 var(--mono); color: var(--muted); }
+
+.more-work { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 2.5rem; }
+.card { background: var(--surface); border: 1px solid var(--rule); border-radius: 0.75rem; padding: 1.25rem; display: grid; gap: 0.6rem; align-content: start; }
+.card p { margin: 0; color: var(--muted); font-size: 0.9375rem; }
+@media (max-width: 640px) { .more-work { grid-template-columns: minmax(0, 1fr); } }
+
+/* timeline */
+.timeline { list-style: none; margin: 0; padding: 0; display: grid; }
+.timeline li { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr); gap: 1.25rem; padding-block: 1.1rem; border-top: 1px solid var(--rule); }
+.timeline li:first-child { border-top: 0; padding-top: 0; }
+.timeline time { font: 400 0.875rem/1.6 var(--mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+.timeline .kind { font: 500 0.6875rem/1 var(--mono); text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 0.35rem; display: block; }
+.timeline p { margin: 0.25rem 0 0; color: var(--muted); font-size: 0.9375rem; }
+@media (max-width: 480px) { .timeline li { grid-template-columns: minmax(0, 1fr); gap: 0.25rem; } }
+
+/* skills */
+.skills { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem; }
+.skills h3 { font-size: 0.9375rem; margin-bottom: 0.6rem; }
+.skills ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.skills li { font-size: 0.875rem; padding: 0.3rem 0.6rem; border: 1px solid var(--rule); border-radius: 0.375rem; background: var(--surface); }
+@media (max-width: 640px) { .skills { grid-template-columns: minmax(0, 1fr); } }
+.langs { display: flex; flex-wrap: wrap; gap: 0.5rem 2rem; margin-top: 2.5rem; padding-top: 1.25rem; border-top: 1px solid var(--rule); }
+.langs div { display: flex; gap: 0.5rem; align-items: baseline; }
+.langs span { color: var(--muted); font-size: 0.875rem; }
+
+/* contact */
+.contact h2 { font-size: clamp(2rem, 5vw, 3.25rem); line-height: 1.05; max-width: 22ch; }
+.mail-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; margin-top: 1.5rem; }
+.mail { font: 500 clamp(1rem, 2.6vw, 1.375rem)/1.3 var(--mono); user-select: all; overflow-wrap: anywhere; }
+.copied { font: 400 0.8125rem/1 var(--mono); color: var(--ok); }
+
+footer { padding-block: 2rem 3rem; font: 400 0.75rem/1.5 var(--mono); color: var(--muted); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero > * { animation: rise 0.6s cubic-bezier(.2,.7,.2,1) both; }
+  .hero > *:nth-child(2) { animation-delay: 0.05s; }
+  .hero > *:nth-child(3) { animation-delay: 0.1s; }
+  .hero > *:nth-child(4) { animation-delay: 0.15s; }
+  .hero > *:nth-child(5) { animation-delay: 0.2s; }
+  @keyframes rise { from { transform: translateY(8px); } to { transform: none; } }
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="#top">Salah Zirari</a>
+    <nav aria-label="Sections">
+      <a href="#work"><span data-l="fr">Projets</span><span data-l="en">Work</span></a>
+      <a href="#path"><span data-l="fr">Parcours</span><span data-l="en">Experience</span></a>
+      <a href="#skills"><span data-l="fr">Compétences</span><span data-l="en">Skills</span></a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="lang" role="group" aria-label="Langue / Language">
+      <button type="button" id="lang-fr" data-set="fr" aria-pressed="true">FR</button>
+      <button type="button" id="lang-en" data-set="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap" id="top">
+  <div class="hero">
+    <div class="status">
+      <span class="dot" aria-hidden="true"></span>
+      <span data-l="fr">Lyon, France · Recherche un stage d'un an · 1 semaine école / 2 semaines entreprise</span>
+      <span data-l="en">Lyon, France · Looking for a one-year internship · 1 week at school / 2 weeks at work</span>
+    </div>
+    <h1>Salah Zirari</h1>
+    <p class="role"><span data-l="fr">Tech lead full stack · .NET &amp; Azure</span><span data-l="en">Full-stack tech lead · .NET &amp; Azure</span></p>
+    <p class="pitch">
+      <span data-l="fr">4 ans à construire des systèmes distribués sur .NET, du code à l'infrastructure Azure. Mon dernier projet : une plateforme qui ingère chaque jour plusieurs millions de points de données du marché européen de l'énergie.</span>
+      <span data-l="en">4 years building distributed systems on .NET, from the code to the Azure infrastructure. My latest project is a platform that ingests several million European energy-market data points every day.</span>
+    </p>
+    <div class="actions">
+      <a class="btn primary" href="#contact">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="1.5" y="3" width="13" height="10" rx="1.5"/><path d="M2 4l6 5 6-5"/></svg>
+        <span data-l="fr">Me contacter</span><span data-l="en">Get in touch</span>
+      </a>
+      <a class="btn" href="https://www.linkedin.com/in/salaheddine-zirari" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M3.6 5.5H1.2V14h2.4V5.5zM2.4 1.6a1.4 1.4 0 100 2.8 1.4 1.4 0 000-2.8zM14.8 9.3c0-2.3-.5-4-3.1-4-1.3 0-2.1.7-2.5 1.3V5.5H6.9V14h2.4V9.8c0-1.1.2-2.2 1.6-2.2 1.4 0 1.4 1.3 1.4 2.3V14h2.4V9.3z"/></svg>
+        LinkedIn
+      </a>
+    </div>
+    <div class="trace" aria-hidden="true">
+      <canvas id="wave"></canvas>
+      <small><span data-l="fr">50 Hz · fréquence du réseau électrique européen</span><span data-l="en">50 Hz · European power grid frequency</span></small>
+    </div>
+  </div>
+
+  <div class="figures">
+    <div><b>4</b><span data-l="fr">ans d'expérience</span><span data-l="en">years of experience</span></div>
+    <div><b>20+</b><span data-l="fr">sources de marché intégrées</span><span data-l="en">market data sources integrated</span></div>
+    <div><b data-l="fr">Millions</b><b data-l="en">Millions</b><span data-l="fr">de points de données par jour</span><span data-l="en">of data points per day</span></div>
+    <div><b>4</b><span data-l="fr">développeurs encadrés</span><span data-l="en">developers led</span></div>
+  </div>
+
+  <section class="block" id="work">
+    <div class="label"><span data-l="fr">Projets</span><span data-l="en">Work</span></div>
+    <div>
+      <div class="case">
+        <div>
+          <p class="meta">NOPO · Technical Lead · 2023 – 2026</p>
+          <h2><span data-l="fr">Plateforme de données du marché européen de l'énergie</span><span data-l="en">European energy-market data platform</span></h2>
+          <p class="lede">
+            <span data-l="fr">Référent technique d'une startup de 10 personnes. J'ai porté le projet de bout en bout : code, bases de données, infrastructure et DevOps, avec une équipe de 4 développeurs.</span>
+            <span data-l="en">Technical lead at a 10-person startup. I owned the project end to end: code, databases, infrastructure and DevOps, with a team of 4 developers.</span>
+          </p>
+        </div>
+        <div class="sources" aria-label="Sources">
+          <span>RTE</span><span>ENTSO-E</span><span>OTE</span><span>CEPS</span><span>JAO</span><span>EPEX</span>
+          <span class="more"><span data-l="fr">et plus de 14 autres</span><span data-l="en">and 14+ more</span></span>
+        </div>
+        <ul class="points">
+          <li>
+            <strong><span data-l="fr">Ingestion microservices</span><span data-l="en">Microservice ingestion</span></strong>
+            <p data-l="fr">Collecte REST et AMQP, normalisation, puis persistance dans Azure SQL via EF Core.</p>
+            <p data-l="en">REST and AMQP collection, normalisation, then persistence to Azure SQL through EF Core.</p>
+          </li>
+          <li>
+            <strong><span data-l="fr">Formats et sécurité propres à chaque opérateur</span><span data-l="en">Per-operator formats and security</span></strong>
+            <p data-l="fr">Authentification double certificat (TLS et signature XML), parsing des formats propriétaires de chaque opérateur.</p>
+            <p data-l="en">Dual-certificate authentication (TLS and XML signature), parsers for each operator's proprietary format.</p>
+          </li>
+          <li>
+            <strong><span data-l="fr">Jours de 23 h et de 25 h</span><span data-l="en">23-hour and 25-hour days</span></strong>
+            <p data-l="fr">Gestion du changement d'heure sur chaque série temporelle, pour que les données de marché restent alignées.</p>
+            <p data-l="en">Daylight-saving transitions handled on every time series, so market data stays aligned.</p>
+          </li>
+          <li>
+            <strong><span data-l="fr">Performance et sécurité SQL</span><span data-l="en">SQL performance and security</span></strong>
+            <p data-l="fr">Optimisation des requêtes, gestion de la concurrence EF, audit de sécurité SQL Server (permissions, Resource Locks).</p>
+            <p data-l="en">Query tuning, EF concurrency handling, SQL Server security audit (permissions, Resource Locks).</p>
+          </li>
+          <li>
+            <strong><span data-l="fr">Déploiement</span><span data-l="en">Deployment</span></strong>
+            <p data-l="fr">Azure App Services et VMs Linux (systemd), pipelines CI/CD sur Azure DevOps.</p>
+            <p data-l="en">Azure App Services and Linux VMs (systemd), CI/CD pipelines on Azure DevOps.</p>
+          </li>
+          <li>
+            <strong><span data-l="fr">Monitoring de production</span><span data-l="en">Production monitoring</span></strong>
+            <p data-l="fr">Surveillance des endpoints avec alertes desktop et mobile, supervision via ELK et Kibana.</p>
+            <p data-l="en">Endpoint monitoring with desktop and mobile alerts, observability through ELK and Kibana.</p>
+          </li>
+        </ul>
+        <div class="tags"><span>C#</span><span>.NET</span><span>EF Core</span><span>Azure SQL</span><span>RabbitMQ</span><span>Hangfire</span><span>Azure DevOps</span><span>ELK</span></div>
+      </div>
+
+      <div class="more-work">
+        <article class="card">
+          <p class="meta">Reecho · Fullstack Developer · 2022 – 2023</p>
+          <h3><span data-l="fr">Plateforme de gestion pour le portage salarial</span><span data-l="en">Management platform for an umbrella company</span></h3>
+          <p data-l="fr">Profils consultants, missions, référencement et finances. APIs ASP.NET Core, interface React, modélisation SQL Server et mise en production.</p>
+          <p data-l="en">Consultant profiles, assignments, client listings and finances. ASP.NET Core APIs, React front end, SQL Server data model and production rollout.</p>
+          <div class="tags"><span>ASP.NET Core</span><span>React</span><span>SQL Server</span></div>
+        </article>
+        <article class="card">
+          <p class="meta">Freelance · 2023 – 2025</p>
+          <h3><span data-l="fr">Développement backend sur mesure</span><span data-l="en">Custom backend development</span></h3>
+          <p data-l="fr">Services backend, conception d'APIs et solutions sur mesure pour des clients externes, en parallèle de mon poste chez NOPO.</p>
+          <p data-l="en">Backend services, API design and custom solutions for external clients, alongside my role at NOPO.</p>
+          <div class="tags"><span>.NET</span><span>REST APIs</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="path">
+    <div class="label"><span data-l="fr">Parcours</span><span data-l="en">Experience</span></div>
+    <ol class="timeline" reversed>
+      <li>
+        <time>2026 – 2028</time>
+        <div>
+          <span class="kind"><span data-l="fr">Formation</span><span data-l="en">Education</span></span>
+          <h3><span data-l="fr">Mastère Expert en Informatique et Système d'Information</span><span data-l="en">Master's, IT and Information Systems Expert</span></h3>
+          <p>EPSI Lyon · RNCP 7</p>
+        </div>
+      </li>
+      <li>
+        <time>2023 – 2026</time>
+        <div>
+          <span class="kind"><span data-l="fr">Expérience</span><span data-l="en">Work</span></span>
+          <h3>Technical Lead · NOPO</h3>
+          <p data-l="fr">Stack backend, équipe de 4 développeurs, code reviews et onboarding.</p>
+          <p data-l="en">Backend stack, team of 4 developers, code reviews and onboarding.</p>
+        </div>
+      </li>
+      <li>
+        <time>2023 – 2025</time>
+        <div>
+          <span class="kind"><span data-l="fr">Expérience</span><span data-l="en">Work</span></span>
+          <h3>Freelance Software Developer</h3>
+          <p data-l="fr">Services backend et APIs pour des clients externes.</p>
+          <p data-l="en">Backend services and APIs for external clients.</p>
+        </div>
+      </li>
+      <li>
+        <time>2022 – 2023</time>
+        <div>
+          <span class="kind"><span data-l="fr">Expérience</span><span data-l="en">Work</span></span>
+          <h3>Fullstack Developer · Reecho</h3>
+          <p data-l="fr">Conseil technologique et livraison de logiciels.</p>
+          <p data-l="en">Technology consulting and software delivery.</p>
+        </div>
+      </li>
+      <li>
+        <time>2022 – 2023</time>
+        <div>
+          <span class="kind"><span data-l="fr">Formation</span><span data-l="en">Education</span></span>
+          <h3><span data-l="fr">Bachelor Génie Logiciel</span><span data-l="en">Bachelor's in Software Engineering</span></h3>
+          <p>ESRMI · Rabat</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="block" id="skills">
+    <div class="label"><span data-l="fr">Compétences</span><span data-l="en">Skills</span></div>
+    <div>
+      <div class="skills">
+        <div>
+          <h3><span data-l="fr">Langages et frameworks</span><span data-l="en">Languages and frameworks</span></h3>
+          <ul><li>C#</li><li>.NET</li><li>ASP.NET Core</li><li>Entity Framework Core</li><li>TypeScript</li><li>JavaScript</li><li>React</li><li>SQL</li></ul>
+        </div>
+        <div>
+          <h3><span data-l="fr">Infrastructure et DevOps</span><span data-l="en">Infrastructure and DevOps</span></h3>
+          <ul><li>Azure App Services</li><li>Azure SQL</li><li>Azure VMs</li><li>Azure DevOps</li><li>CI/CD</li><li>Linux</li><li>systemd</li><li>RabbitMQ</li><li>AMQP</li><li>Hangfire</li></ul>
+        </div>
+        <div>
+          <h3>Architecture</h3>
+          <ul><li>Microservices</li><li data-l="fr">Systèmes distribués</li><li data-l="en">Distributed systems</li><li>REST APIs</li><li>SOLID</li><li>Design patterns</li><li>Agile</li><li>Scrum</li></ul>
+        </div>
+        <div>
+          <h3><span data-l="fr">Encadrement</span><span data-l="en">Leadership</span></h3>
+          <ul>
+            <li data-l="fr">Responsabilité technique</li><li data-l="en">Technical ownership</li>
+            <li data-l="fr">Organisation d'équipe</li><li data-l="en">Team organisation</li>
+            <li>Code review</li>
+            <li data-l="fr">Intégration de développeurs</li><li data-l="en">Onboarding developers</li>
+          </ul>
+        </div>
+      </div>
+      <div class="langs">
+        <div><strong data-l="fr">Arabe</strong><strong data-l="en">Arabic</strong><span data-l="fr">langue maternelle</span><span data-l="en">native</span></div>
+        <div><strong data-l="fr">Français</strong><strong data-l="en">French</strong><span data-l="fr">courant</span><span data-l="en">fluent</span></div>
+        <div><strong data-l="fr">Anglais</strong><strong data-l="en">English</strong><span data-l="fr">courant</span><span data-l="en">fluent</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block contact" id="contact">
+    <div class="label">Contact</div>
+    <div>
+      <h2><span data-l="fr">Vous cherchez un stagiaire qui a déjà mené des projets en production ?</span><span data-l="en">Looking for an intern who has already shipped to production?</span></h2>
+      <p class="pitch" style="margin-bottom:0">
+        <span data-l="fr">Disponible pour un stage conventionné d'un an à Lyon, en rythme 1 semaine école / 2 semaines entreprise.</span>
+        <span data-l="en">Available for a one-year internship in Lyon, alternating 1 week at school and 2 weeks at the company.</span>
+      </p>
+      <div class="mail-row">
+        <span class="mail" id="mail">salahzirari1@gmail.com</span>
+        <button class="btn" type="button" id="copy-mail">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3.5A1.5 1.5 0 009.5 2h-6A1.5 1.5 0 002 3.5v6A1.5 1.5 0 003.5 11H5"/></svg>
+          <span data-l="fr">Copier</span><span data-l="en">Copy</span>
+        </button>
+        <span class="copied" id="copied" role="status" aria-live="polite"></span>
+      </div>
+      <div class="actions" style="margin-top:1.25rem">
+        <a class="btn" href="https://www.linkedin.com/in/salaheddine-zirari" target="_blank" rel="noopener">linkedin.com/in/salaheddine-zirari</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">© 2026 Salah Zirari · Lyon</footer>
+
+<script>
+(function () {
+  var root = document.documentElement;
+
+  // language
+  function setLang(l) {
+    root.setAttribute('data-lang', l);
+    root.setAttribute('lang', l);
+    document.querySelectorAll('.lang button').forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.dataset.set === l));
+    });
+    try { localStorage.setItem('lang', l); } catch (e) {}
+  }
+  var saved = null;
+  try { saved = localStorage.getItem('lang'); } catch (e) {}
+  setLang(saved === 'en' ? 'en' : 'fr');
+  document.querySelectorAll('.lang button').forEach(function (b) {
+    b.addEventListener('click', function () { setLang(b.dataset.set); });
+  });
+
+  // copy email
+  var copyBtn = document.getElementById('copy-mail');
+  var status = document.getElementById('copied');
+  copyBtn.addEventListener('click', function () {
+    var text = document.getElementById('mail').textContent;
+    var done = function () {
+      status.textContent = root.getAttribute('data-lang') === 'en' ? 'Copied' : 'Copié';
+      setTimeout(function () { status.textContent = ''; }, 2000);
+    };
+    var fallback = function () {
+      var r = document.createRange();
+      r.selectNodeContents(document.getElementById('mail'));
+      var s = getSelection(); s.removeAllRanges(); s.addRange(r);
+    };
+    try {
+      navigator.clipboard.writeText(text).then(done, fallback);
+    } catch (e) { fallback(); }
+  });
+
+  // 50 Hz trace
+  var c = document.getElementById('wave');
+  var ctx = c.getContext('2d');
+  var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var t0 = performance.now();
+  function size() {
+    var dpr = window.devicePixelRatio || 1;
+    c.width = c.clientWidth * dpr; c.height = c.clientHeight * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  function draw(now) {
+    var w = c.clientWidth, h = c.clientHeight, mid = h / 2;
+    var cs = getComputedStyle(root);
+    ctx.clearRect(0, 0, w, h);
+    ctx.strokeStyle = cs.getPropertyValue('--rule').trim();
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(0, mid); ctx.lineTo(w, mid); ctx.stroke();
+    ctx.strokeStyle = cs.getPropertyValue('--accent').trim();
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    var phase = still ? 0 : (now - t0) / 900;
+    var cycles = Math.max(4, Math.round(w / 90));
+    for (var x = 0; x <= w; x += 2) {
+      var y = mid - Math.sin((x / w) * cycles * 2 * Math.PI - phase) * (h * 0.36);
+      x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+    if (!still) requestAnimationFrame(draw);
+  }
+  size();
+  window.addEventListener('resize', function () { size(); if (still) draw(0); });
+  still ? draw(0) : requestAnimationFrame(draw);
+  if (still) window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function () { draw(0); });
+})();
+</script>
+</body>
+</html>
