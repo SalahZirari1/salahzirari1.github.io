@@ -31,7 +31,7 @@ export function Contact() {
   };
 
   return (
-    <Section id="contact" label={t(nav[3].label)} className="contact">
+    <Section id="contact" label={t(nav.contact)} className="contact">
       <h2>{t(contact.title)}</h2>
       <p className="pitch" style={{ marginBottom: 0 }}>{t(contact.body)}</p>
       <div className="mail-row">

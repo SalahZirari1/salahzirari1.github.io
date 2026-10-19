@@ -1,7 +1,6 @@
 import { LINKEDIN, figures, hero } from '../content';
 import { useLang } from '../lang';
 import { LinkedInIcon, MailIcon } from './Icons';
-import { Wave } from './Wave';
 
 export function Hero() {
   const { t } = useLang();
@@ -21,14 +20,11 @@ export function Hero() {
             <MailIcon />
             {t(hero.contactCta)}
           </a>
+          <a className="btn" href="#work">{t(hero.workCta)}</a>
           <a className="btn" href={LINKEDIN} target="_blank" rel="noopener">
             <LinkedInIcon />
             LinkedIn
           </a>
-        </div>
-        <div className="trace" aria-hidden="true">
-          <Wave />
-          <small>{t(hero.wave)}</small>
         </div>
       </div>
 

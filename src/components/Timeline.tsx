@@ -6,7 +6,7 @@ export function Timeline() {
   const { t } = useLang();
 
   return (
-    <Section id="path" label={t(nav[1].label)}>
+    <Section id="path" label={t(nav.path)}>
       <ol className="timeline" reversed>
         {timeline.map((item) => (
           <li key={item.title.en}>

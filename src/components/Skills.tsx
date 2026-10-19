@@ -6,7 +6,7 @@ export function Skills() {
   const { t } = useLang();
 
   return (
-    <Section id="skills" label={t(nav[2].label)}>
+    <Section id="skills" label={t(nav.skills)}>
       <div className="skills">
         {skills.map((group) => (
           <div key={group.title.en}>

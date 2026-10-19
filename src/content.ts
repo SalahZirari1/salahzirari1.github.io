@@ -3,114 +3,199 @@ export type Text = Record<Lang, string>;
 
 export const EMAIL = 'salahzirari1@gmail.com';
 export const LINKEDIN = 'https://www.linkedin.com/in/salaheddine-zirari';
+export const SOURCE = 'https://github.com/SalahZirari1/salahzirari1.github.io';
 
-export const nav = [
-  { id: 'work', label: { fr: 'Projets', en: 'Work' } },
-  { id: 'path', label: { fr: 'Parcours', en: 'Experience' } },
-  { id: 'skills', label: { fr: 'Compétences', en: 'Skills' } },
-  { id: 'contact', label: { fr: 'Contact', en: 'Contact' } },
-] satisfies { id: string; label: Text }[];
+const same = (s: string): Text => ({ fr: s, en: s });
+
+export const nav = {
+  expertise: { fr: 'Expertise', en: 'Expertise' },
+  work: { fr: 'Projets', en: 'Work' },
+  approach: { fr: 'Méthode', en: 'Approach' },
+  path: { fr: 'Parcours', en: 'Experience' },
+  skills: { fr: 'Compétences', en: 'Skills' },
+  contact: { fr: 'Contact', en: 'Contact' },
+} satisfies Record<string, Text>;
 
 export const hero = {
-  status: {
-    fr: "Lyon, France · Recherche un stage d'un an · 1 semaine école / 2 semaines entreprise",
-    en: 'Lyon, France · Looking for a one-year internship · 1 week at school / 2 weeks at work',
-  },
-  role: { fr: 'Tech lead full stack · .NET & Azure', en: 'Full-stack tech lead · .NET & Azure' },
+  status: { fr: 'Basé à Lyon · Ouvert aux opportunités', en: 'Based in Lyon · Open to opportunities' },
+  role: { fr: 'Ingénieur Full Stack & DevOps', en: 'Full-Stack & DevOps Engineer' },
   pitch: {
-    fr: "4 ans à construire des systèmes distribués sur .NET, du code à l'infrastructure Azure. Mon dernier projet : une plateforme qui ingère chaque jour plusieurs millions de points de données du marché européen de l'énergie.",
-    en: '4 years building distributed systems on .NET, from the code to the Azure infrastructure. My latest project is a platform that ingests several million European energy-market data points every day.',
+    fr: "Je conçois, livre et fais tourner des applications de bout en bout : interfaces, APIs, bases de données, pipelines et infrastructure cloud. 4 ans d'expérience, dont 3 à la tête technique d'une plateforme de données en production.",
+    en: 'I design, ship and run applications end to end: interfaces, APIs, databases, pipelines and cloud infrastructure. 4 years of experience, including 3 as technical lead of a data platform in production.',
   },
   contactCta: { fr: 'Me contacter', en: 'Get in touch' },
-  wave: { fr: '50 Hz · fréquence du réseau électrique européen', en: '50 Hz · European power grid frequency' },
+  workCta: { fr: 'Voir les projets', en: 'See my work' },
 } satisfies Record<string, Text>;
 
 export const figures: { value: string; label: Text }[] = [
-  { value: '4', label: { fr: "ans d'expérience", en: 'years of experience' } },
-  { value: '20+', label: { fr: 'sources de marché intégrées', en: 'market data sources integrated' } },
-  { value: 'Millions', label: { fr: 'de points de données par jour', en: 'of data points per day' } },
-  { value: '4', label: { fr: 'développeurs encadrés', en: 'developers led' } },
+  { value: '4+', label: { fr: "ans d'expérience", en: 'years of experience' } },
+  { value: '3', label: { fr: 'ans comme tech lead', en: 'years as tech lead' } },
+  { value: '18', label: { fr: 'pipelines CI/CD en production', en: 'CI/CD pipelines in production' } },
+  { value: '1200+', label: { fr: 'commits sur le projet principal', en: 'commits on my main project' } },
+];
+
+export const expertise: { title: Text; body: Text; items: string[] }[] = [
+  {
+    title: { fr: 'Développement full stack', en: 'Full-stack development' },
+    body: {
+      fr: "Des APIs robustes et des interfaces claires, avec un modèle de données pensé pour durer.",
+      en: 'Solid APIs and clear interfaces, on top of a data model built to last.',
+    },
+    items: ['APIs REST', 'React', 'TypeScript', '.NET', 'SQL'],
+  },
+  {
+    title: { fr: 'DevOps et cloud', en: 'DevOps and cloud' },
+    body: {
+      fr: 'Du commit à la production sans étape manuelle, puis une supervision qui prévient avant les utilisateurs.',
+      en: 'From commit to production with no manual steps, then monitoring that warns you before users do.',
+    },
+    items: ['CI/CD', 'Azure', 'Linux', 'Monitoring', 'Infrastructure'],
+  },
+  {
+    title: { fr: 'Lead technique', en: 'Technical leadership' },
+    body: {
+      fr: "Choix d'architecture, revues de code et documentation, pour qu'une équipe avance vite sans casser l'existant.",
+      en: 'Architecture decisions, code reviews and documentation, so a team moves fast without breaking what works.',
+    },
+    items: ['Architecture', 'Code review', 'Onboarding', 'Documentation'],
+  },
 ];
 
 export const featured = {
-  meta: 'NOPO · Technical Lead · 2023 – 2026',
-  title: { fr: "Plateforme de données du marché européen de l'énergie", en: 'European energy-market data platform' },
-  lede: {
-    fr: "Référent technique d'une startup de 10 personnes. J'ai porté le projet de bout en bout : code, bases de données, infrastructure et DevOps, avec une équipe de 4 développeurs.",
-    en: 'Technical lead at a 10-person startup. I owned the project end to end: code, databases, infrastructure and DevOps, with a team of 4 developers.',
+  eyebrow: { fr: 'Projet phare', en: 'Featured project' },
+  meta: 'XPower · NOPO · 2023 – 2026',
+  title: {
+    fr: "Plateforme de données temps réel pour le marché européen de l'énergie",
+    en: 'Real-time data platform for the European energy market',
   },
-  sources: ['RTE', 'ENTSO-E', 'OTE', 'CEPS', 'JAO', 'EPEX'],
-  moreSources: { fr: 'et plus de 14 autres', en: 'and 14+ more' },
+  lede: {
+    fr: "XPower collecte, normalise et sert en continu les données de 20 opérateurs et bourses de l'énergie en Europe. J'en ai été le référent technique : architecture, code, bases de données, infrastructure et équipe.",
+    en: 'XPower continuously collects, normalises and serves data from 20 European energy operators and exchanges. I was its technical lead: architecture, code, databases, infrastructure and team.',
+  },
+  stats: [
+    { value: '20', label: { fr: 'sources intégrées', en: 'sources integrated' } },
+    { value: '190', label: { fr: 'projets .NET', en: '.NET projects' } },
+    { value: '~200', label: { fr: 'tests automatisés', en: 'automated tests' } },
+    { value: 'Millions', label: { fr: 'de points de données par jour', en: 'of data points a day' } },
+  ],
   points: [
     {
-      title: { fr: 'Ingestion microservices', en: 'Microservice ingestion' },
+      title: { fr: 'Architecture modulaire', en: 'Modular architecture' },
       body: {
-        fr: 'Collecte REST et AMQP, normalisation, puis persistance dans Azure SQL via EF Core.',
-        en: 'REST and AMQP collection, normalisation, then persistence to Azure SQL through EF Core.',
+        fr: 'Une solution en couches où chaque source est un service indépendant, testé et déployé séparément. Ajouter une source ne touche pas aux autres.',
+        en: 'A layered solution where each source is an independent service, tested and deployed on its own. Adding a source never touches the others.',
       },
     },
     {
-      title: { fr: 'Formats et sécurité propres à chaque opérateur', en: 'Per-operator formats and security' },
+      title: { fr: 'Déploiement automatisé', en: 'Automated delivery' },
       body: {
-        fr: 'Authentification double certificat (TLS et signature XML), parsing des formats propriétaires de chaque opérateur.',
-        en: "Dual-certificate authentication (TLS and XML signature), parsers for each operator's proprietary format.",
+        fr: '18 pipelines Azure DevOps : chaque pull request est compilée et testée, les migrations de base sont appliquées automatiquement, chaque service se déploie seul.',
+        en: '18 Azure DevOps pipelines: every pull request is built and tested, database migrations run automatically, each service deploys on its own.',
       },
     },
     {
-      title: { fr: 'Jours de 23 h et de 25 h', en: '23-hour and 25-hour days' },
+      title: { fr: 'Fiabilité en production', en: 'Production reliability' },
       body: {
-        fr: "Gestion du changement d'heure sur chaque série temporelle, pour que les données de marché restent alignées.",
-        en: 'Daylight-saving transitions handled on every time series, so market data stays aligned.',
+        fr: 'Contrôles de santé qui détectent les données manquantes et relancent la collecte seuls, alertes desktop et mobile, logs centralisés dans ELK et Kibana.',
+        en: 'Health checks that detect missing data and re-run collection on their own, desktop and mobile alerts, centralised logs in ELK and Kibana.',
       },
     },
     {
-      title: { fr: 'Performance et sécurité SQL', en: 'SQL performance and security' },
+      title: { fr: 'Performance des données', en: 'Data performance' },
       body: {
-        fr: 'Optimisation des requêtes, gestion de la concurrence EF, audit de sécurité SQL Server (permissions, Resource Locks).',
-        en: 'Query tuning, EF concurrency handling, SQL Server security audit (permissions, Resource Locks).',
+        fr: 'Plusieurs millions de lignes par jour dans Azure SQL, avec optimisation des requêtes, des index et de la concurrence EF Core.',
+        en: 'Millions of rows a day in Azure SQL, with tuned queries, indexes and EF Core concurrency handling.',
       },
     },
     {
-      title: { fr: 'Déploiement', en: 'Deployment' },
+      title: { fr: 'Sécurité', en: 'Security' },
       body: {
-        fr: 'Azure App Services et VMs Linux (systemd), pipelines CI/CD sur Azure DevOps.',
-        en: 'Azure App Services and Linux VMs (systemd), CI/CD pipelines on Azure DevOps.',
+        fr: 'Authentification par certificats (TLS et signature XML) auprès des opérateurs, audit des permissions SQL Server et protection des ressources Azure.',
+        en: 'Certificate-based authentication (TLS and XML signatures) with operators, SQL Server permission audit and Azure resource protection.',
       },
     },
     {
-      title: { fr: 'Monitoring de production', en: 'Production monitoring' },
+      title: { fr: 'Équipe et transmission', en: 'Team and knowledge sharing' },
       body: {
-        fr: 'Surveillance des endpoints avec alertes desktop et mobile, supervision via ELK et Kibana.',
-        en: 'Endpoint monitoring with desktop and mobile alerts, observability through ELK and Kibana.',
+        fr: "Encadrement de 4 développeurs, revues de code systématiques et guides d'intégration qui permettent à un nouveau développeur d'ajouter une source en autonomie.",
+        en: 'Led 4 developers, reviewed every change and wrote integration guides so a new developer can add a source on their own.',
       },
     },
   ],
-  tags: ['C#', '.NET', 'EF Core', 'Azure SQL', 'RabbitMQ', 'Hangfire', 'Azure DevOps', 'ELK'],
+  tags: ['.NET 8', 'ASP.NET Core', 'EF Core', 'Azure SQL', 'RabbitMQ', 'Hangfire', 'Azure DevOps', 'Linux', 'ELK'],
 };
 
-export const otherWork: { meta: string; title: Text; body: Text; tags: string[] }[] = [
+export const otherWork: { meta: string; title: Text; body: Text; tags: string[]; link?: { href: string; label: Text } }[] = [
   {
-    meta: 'Reecho · Fullstack Developer · 2022 – 2023',
+    meta: 'Reecho · 2022 – 2023',
     title: { fr: 'Plateforme de gestion pour le portage salarial', en: 'Management platform for an umbrella company' },
     body: {
-      fr: 'Profils consultants, missions, référencement et finances. APIs ASP.NET Core, interface React, modélisation SQL Server et mise en production.',
-      en: 'Consultant profiles, assignments, client listings and finances. ASP.NET Core APIs, React front end, SQL Server data model and production rollout.',
+      fr: "Application web complète pour gérer consultants, missions, clients et facturation. J'ai livré les APIs, l'interface React et le modèle de données jusqu'à la mise en production.",
+      en: 'A complete web application to manage consultants, assignments, clients and billing. I delivered the APIs, the React interface and the data model through to production.',
     },
     tags: ['ASP.NET Core', 'React', 'SQL Server'],
   },
   {
     meta: 'Freelance · 2023 – 2025',
-    title: { fr: 'Développement backend sur mesure', en: 'Custom backend development' },
+    title: { fr: 'Services backend sur mesure', en: 'Custom backend services' },
     body: {
-      fr: "Services backend, conception d'APIs et solutions sur mesure pour des clients externes, en parallèle de mon poste chez NOPO.",
-      en: 'Backend services, API design and custom solutions for external clients, alongside my role at NOPO.',
+      fr: "Conception d'APIs et de services backend pour des clients externes, du cadrage du besoin à la livraison.",
+      en: 'API and backend service design for external clients, from scoping the need to delivery.',
     },
-    tags: ['.NET', 'REST APIs'],
+    tags: ['.NET', 'APIs REST', 'SQL'],
+  },
+  {
+    meta: 'Portfolio · 2026',
+    title: { fr: 'Ce site', en: 'This website' },
+    body: {
+      fr: 'Application React et TypeScript, bilingue, construite avec Vite et déployée automatiquement sur GitHub Pages à chaque push.',
+      en: 'A bilingual React and TypeScript app, built with Vite and deployed to GitHub Pages automatically on every push.',
+    },
+    tags: ['React', 'TypeScript', 'Vite', 'GitHub Actions'],
+    link: { href: SOURCE, label: { fr: 'Voir le code', en: 'View the code' } },
+  },
+];
+
+export const approach: { title: Text; body: Text }[] = [
+  {
+    title: { fr: 'Livrer petit et souvent', en: 'Ship small, ship often' },
+    body: {
+      fr: 'Des pull requests courtes, relues et déployées automatiquement. Les problèmes se voient tôt et coûtent peu.',
+      en: 'Short pull requests, reviewed and deployed automatically. Problems surface early and cost little.',
+    },
+  },
+  {
+    title: { fr: 'Automatiser ce qui se répète', en: 'Automate the repetitive' },
+    body: {
+      fr: 'Builds, tests, migrations, déploiements et contrôles de santé tournent seuls, pour que l’équipe se concentre sur le produit.',
+      en: 'Builds, tests, migrations, deployments and health checks run on their own, so the team can focus on the product.',
+    },
+  },
+  {
+    title: { fr: 'Observer avant de deviner', en: 'Observe before guessing' },
+    body: {
+      fr: 'Logs, métriques et alertes dès le premier jour. On corrige ce qu’on voit, pas ce qu’on suppose.',
+      en: 'Logs, metrics and alerts from day one. You fix what you can see, not what you assume.',
+    },
+  },
+  {
+    title: { fr: 'Écrire pour l’équipe', en: 'Write for the team' },
+    body: {
+      fr: 'Code lisible, revues bienveillantes et guides à jour : un nouveau développeur doit être autonome vite.',
+      en: 'Readable code, constructive reviews and up-to-date guides: a new developer should be productive quickly.',
+    },
+  },
+  {
+    title: { fr: 'Utiliser l’IA avec méthode', en: 'Use AI with intent' },
+    body: {
+      fr: 'Claude Code pour explorer un code existant, refactorer et écrire des tests plus vite, toujours avec une relecture humaine.',
+      en: 'Claude Code to explore existing code, refactor and write tests faster, always with human review.',
+    },
   },
 ];
 
 const education: Text = { fr: 'Formation', en: 'Education' };
-const work: Text = { fr: 'Expérience', en: 'Work' };
+const job: Text = { fr: 'Expérience', en: 'Work' };
 
 export const timeline: { years: string; kind: Text; title: Text; detail: Text }[] = [
   {
@@ -120,64 +205,73 @@ export const timeline: { years: string; kind: Text; title: Text; detail: Text }[
       fr: "Mastère Expert en Informatique et Système d'Information",
       en: "Master's, IT and Information Systems Expert",
     },
-    detail: { fr: 'EPSI Lyon · RNCP 7', en: 'EPSI Lyon · RNCP 7' },
+    detail: same('EPSI Lyon · RNCP 7'),
   },
   {
     years: '2023 – 2026',
-    kind: work,
-    title: { fr: 'Technical Lead · NOPO', en: 'Technical Lead · NOPO' },
+    kind: job,
+    title: same('Technical Lead · NOPO'),
     detail: {
-      fr: 'Stack backend, équipe de 4 développeurs, code reviews et onboarding.',
-      en: 'Backend stack, team of 4 developers, code reviews and onboarding.',
+      fr: 'Référent technique d’une startup de 10 personnes : plateforme XPower, équipe de 4 développeurs, infrastructure Azure.',
+      en: 'Technical lead at a 10-person startup: XPower platform, team of 4 developers, Azure infrastructure.',
     },
   },
   {
     years: '2023 – 2025',
-    kind: work,
-    title: { fr: 'Freelance Software Developer', en: 'Freelance Software Developer' },
+    kind: job,
+    title: same('Freelance Software Developer'),
     detail: { fr: 'Services backend et APIs pour des clients externes.', en: 'Backend services and APIs for external clients.' },
   },
   {
     years: '2022 – 2023',
-    kind: work,
-    title: { fr: 'Fullstack Developer · Reecho', en: 'Fullstack Developer · Reecho' },
+    kind: job,
+    title: same('Fullstack Developer · Reecho'),
     detail: { fr: 'Conseil technologique et livraison de logiciels.', en: 'Technology consulting and software delivery.' },
   },
   {
     years: '2022 – 2023',
     kind: education,
     title: { fr: 'Bachelor Génie Logiciel', en: "Bachelor's in Software Engineering" },
-    detail: { fr: 'ESRMI · Rabat', en: 'ESRMI · Rabat' },
+    detail: same('ESRMI · Rabat'),
   },
 ];
 
-const same = (s: string): Text => ({ fr: s, en: s });
-
 export const skills: { title: Text; items: Text[] }[] = [
   {
-    title: { fr: 'Langages et frameworks', en: 'Languages and frameworks' },
-    items: ['C#', '.NET', 'ASP.NET Core', 'Entity Framework Core', 'TypeScript', 'JavaScript', 'React', 'SQL'].map(same),
+    title: same('Backend'),
+    items: ['C#', '.NET 8', 'ASP.NET Core', 'Entity Framework Core', 'REST APIs', 'RabbitMQ', 'AMQP', 'Hangfire'].map(same),
   },
   {
-    title: { fr: 'Infrastructure et DevOps', en: 'Infrastructure and DevOps' },
-    items: ['Azure App Services', 'Azure SQL', 'Azure VMs', 'Azure DevOps', 'CI/CD', 'Linux', 'systemd', 'RabbitMQ', 'AMQP', 'Hangfire'].map(same),
+    title: same('Frontend'),
+    items: ['React', 'TypeScript', 'JavaScript', 'HTML', 'CSS', 'Vite'].map(same),
   },
   {
-    title: same('Architecture'),
+    title: { fr: 'Données', en: 'Data' },
+    items: [
+      ...['SQL Server', 'Azure SQL', 'SQL'].map(same),
+      { fr: 'Modélisation de données', en: 'Data modelling' },
+      { fr: 'Optimisation de requêtes', en: 'Query tuning' },
+    ],
+  },
+  {
+    title: { fr: 'DevOps et cloud', en: 'DevOps and cloud' },
+    items: ['Azure App Services', 'Azure VMs', 'Azure DevOps', 'GitHub Actions', 'CI/CD', 'Linux', 'systemd', 'ELK', 'Kibana'].map(same),
+  },
+  {
+    title: { fr: 'Pratiques', en: 'Practices' },
     items: [
       same('Microservices'),
-      { fr: 'Systèmes distribués', en: 'Distributed systems' },
-      ...['REST APIs', 'SOLID', 'Design patterns', 'Agile', 'Scrum'].map(same),
+      { fr: 'Architecture en couches', en: 'Layered architecture' },
+      same('SOLID'),
+      same('Design patterns'),
+      { fr: 'Tests unitaires et d’intégration', en: 'Unit and integration testing' },
+      same('Code review'),
+      same('Agile / Scrum'),
     ],
   },
   {
-    title: { fr: 'Encadrement', en: 'Leadership' },
-    items: [
-      { fr: 'Responsabilité technique', en: 'Technical ownership' },
-      { fr: "Organisation d'équipe", en: 'Team organisation' },
-      same('Code review'),
-      { fr: 'Intégration de développeurs', en: 'Onboarding developers' },
-    ],
+    title: { fr: 'Outils', en: 'Tools' },
+    items: ['Claude Code', 'Git', 'Rider', 'VS Code'].map(same),
   },
 ];
 
@@ -189,13 +283,17 @@ export const languages: { name: Text; level: Text }[] = [
 
 export const contact = {
   title: {
-    fr: 'Vous cherchez un stagiaire qui a déjà mené des projets en production ?',
-    en: 'Looking for an intern who has already shipped to production?',
+    fr: 'Un poste, un projet ou une question ? Parlons-en.',
+    en: "A role, a project or a question? Let's talk.",
   },
   body: {
-    fr: "Disponible pour un stage conventionné d'un an à Lyon, en rythme 1 semaine école / 2 semaines entreprise.",
-    en: 'Available for a one-year internship in Lyon, alternating 1 week at school and 2 weeks at the company.',
+    fr: 'Écrivez-moi par email ou sur LinkedIn, en français ou en anglais.',
+    en: 'Reach me by email or on LinkedIn, in French or English.',
   },
   copy: { fr: 'Copier', en: 'Copy' },
   copied: { fr: 'Copié', en: 'Copied' },
+} satisfies Record<string, Text>;
+
+export const footer = {
+  source: { fr: 'Code source', en: 'Source code' },
 } satisfies Record<string, Text>;
