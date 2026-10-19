@@ -20,8 +20,8 @@ export const hero = {
   status: { fr: 'Basé à Lyon · Ouvert aux opportunités', en: 'Based in Lyon · Open to opportunities' },
   role: { fr: 'Ingénieur Full Stack & DevOps', en: 'Full-Stack & DevOps Engineer' },
   pitch: {
-    fr: "Je conçois, livre et fais tourner des applications de bout en bout : interfaces, APIs, bases de données, pipelines et infrastructure cloud. 4 ans d'expérience, dont 3 à la tête technique d'une plateforme de données en production.",
-    en: 'I design, ship and run applications end to end: interfaces, APIs, databases, pipelines and cloud infrastructure. 4 years of experience, including 3 as technical lead of a data platform in production.',
+    fr: "Je conçois, livre et fais tourner des applications de bout en bout : interfaces, APIs, bases de données, pipelines et infrastructure cloud. 4 ans d'expérience, dont 2 à la tête technique d'une plateforme de données en production.",
+    en: 'I design, ship and run applications end to end: interfaces, APIs, databases, pipelines and cloud infrastructure. 4 years of experience, including 2 as technical lead of a data platform in production.',
   },
   contactCta: { fr: 'Me contacter', en: 'Get in touch' },
   workCta: { fr: 'Voir les projets', en: 'See my work' },
@@ -29,7 +29,7 @@ export const hero = {
 
 export const figures: { value: string; label: Text }[] = [
   { value: '4+', label: { fr: "ans d'expérience", en: 'years of experience' } },
-  { value: '3', label: { fr: 'ans comme tech lead', en: 'years as tech lead' } },
+  { value: '2', label: { fr: 'ans comme tech lead', en: 'years as tech lead' } },
   { value: '18', label: { fr: 'pipelines CI/CD en production', en: 'CI/CD pipelines in production' } },
   { value: '1200+', label: { fr: 'commits sur le projet principal', en: 'commits on my main project' } },
 ];
